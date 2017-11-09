@@ -35,6 +35,22 @@ $text   = file_get_contents($file);
     <div class="column add-bottom">
         <div id="mainwrap" style="padding-top:30px;">
 
+            <?php
+            if ($success):
+            ?>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div style="width:100%; height:50px;background:#ff9900;">
+                        <p style="font-weight:bold;">Successfully updated workouts!</p>
+                    </div>
+                </div>
+            </div>
+
+            <?php
+            endif;
+            ?>
+
             <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <fieldset>
 
