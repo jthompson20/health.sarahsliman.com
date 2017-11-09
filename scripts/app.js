@@ -318,7 +318,6 @@
     navigator.serviceWorker
      .register('/service-worker.js')
      .then(function() { 
-      alert('servis worker registered!');
         console.log('Service Worker Registered'); 
       });
   }
