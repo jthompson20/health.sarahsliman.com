@@ -9,6 +9,9 @@ if (isset($_POST['text'])) {
     // save the text contents
     file_put_contents($file, $_POST['text']);
     $success    = TRUE;
+
+    header("Location: /");
+    exit;
 }
 
 $text   = file_get_contents($file);
