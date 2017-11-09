@@ -2,6 +2,14 @@
 (function() {
   'use strict';
 
+  var console   = {
+    log:  function(msg,data){
+      var node  = document.createElement('p');
+      node.innerHTML  = msg + str(data);
+      document.body.appendChild(node);
+    }
+  };
+
   // init global app vars
   var app   = {
     loading: true,
