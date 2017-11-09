@@ -6,7 +6,7 @@ $file   = '/var/www/health.sarahsliman.com/admin/sarah.json';
 if (isset($_POST['text'])) {
 
     // save the text contents
-    echo file_put_contents($file, $_POST['text']);
+    file_put_contents($file, $_POST['text']);
 
 }
 
