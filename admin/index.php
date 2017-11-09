@@ -3,11 +3,12 @@ $url    = 'https://health.sarahsliman.com/admin/index.php';
 $file   = '/var/www/health.sarahsliman.com/admin/sarah.json';
 
 // check if form has been submitted
+$success    = FALSE;
 if (isset($_POST['text'])) {
 
     // save the text contents
     file_put_contents($file, $_POST['text']);
-
+    $success    = TRUE;
 }
 
 $text   = file_get_contents($file);
