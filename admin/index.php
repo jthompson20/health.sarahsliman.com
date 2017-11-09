@@ -45,7 +45,7 @@ $text   = file_get_contents($file);
                     <!-- Textarea -->
                     <div class="form-group">
                         <div class="col-xs-12">                     
-                            <textarea class="form-control" id="textarea" name="textarea"><?php echo htmlspecialchars($text); ?></textarea>
+                            <textarea class="form-control" id="textarea" style="height:400px;" name="textarea"><?php echo htmlspecialchars($text); ?></textarea>
                         </div>
                     </div>
 
