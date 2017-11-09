@@ -4,7 +4,7 @@ $file   = '/var/www/health.sarahsliman.com/admin/sarah.json';
 
 // check if form has been submitted
 if (isset($_POST['text'])) {
-    
+
     // save the text contents
     file_put_contents($file, $_POST['text']);
 
@@ -13,6 +13,8 @@ if (isset($_POST['text'])) {
     printf('<a href="%s">Moved</a>.', htmlspecialchars($url));
     exit();
 }
+
+$text   = file_get_contents($file);
 
 ?>
 <!DOCTYPE html>
