@@ -1,0 +1,308 @@
+/* CUSTOM */
+
+audio {
+	margin: auto 0 !important;
+  	width:  100% !important;
+}
+
+.refresh {
+	cursor: pointer;
+}
+
+.hidden {
+	display:none !important;
+}
+
+.header {
+  width: 100%;
+  height: 56px;
+  color: #FFF;
+  background: #0665a2;
+  position: fixed;
+  font-size: 20px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12), 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+  padding: 16px 16px 0 16px;
+  will-change: transform;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  -webkit-transition: -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  transition: -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s, -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  z-index: 1000; }
+  .header .headerButton {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    text-indent: -30000px;
+    overflow: hidden;
+    opacity: 0.54;
+    -webkit-transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
+    transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
+    border: none;
+    outline: none;
+    cursor: pointer; }
+  .header #butRefresh {
+    background: url(/images/refresh-dark2.png) center center no-repeat; }
+  .header #butAdd {
+    background: url(/images/ic_add_white_24px.svg) center center no-repeat; }
+   .header #butHome {
+    background: url(/images/gravatar.svg) center center no-repeat; }
+  .header #butFacebook {
+    background: url(/images/fb5.svg) center center no-repeat; }
+
+.header__title {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
+
+.loader {
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+  .loader #ud811Spinner {
+    box-sizing: border-box;
+    stroke: #673AB7;
+    stroke-width: 3px;
+    -webkit-transform-origin: 50%;
+            transform-origin: 50%;
+    -webkit-animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite;
+            animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite; }
+
+
+
+
+
+
+/* Font Family
+================================================== */
+
+@import url('https://fonts.googleapis.com/css?family=Oxygen:300,400,700');
+
+
+/* Global Styles
+================================================== */
+
+html,body {
+-webkit-font-smoothing:antialiased;
+-webkit-text-size-adjust:100%;
+background-color:#0665a2;
+color:#fff;
+font-size:105%;
+font-family:"Oxygen", HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-weight:300;
+letter-spacing:.025rem;
+line-height:1.618;
+/* padding:1rem 0; */
+}
+
+* {
+-webkit-tap-highlight-color:rgba(0,0,0,0);
+-webkit-tap-highlight-color:transparent;
+}
+
+
+/* Setup
+================================================== */
+
+.container { position:relative; margin:0 auto; max-width:800px; width:100%; padding-top:50px; }
+.column { width:inherit; }
+
+
+/* Typography / Links
+================================================== */
+
+p { display:block; font-size:.9rem; font-weight:400; margin:0 0 2px; }
+
+a,a:visited { color:#8cc3e6; outline:0; text-decoration:underline; }
+a:hover,a:focus { color:#bbdef5; }
+p a,p a:visited { line-height:inherit; }
+
+
+/* Misc.
+================================================== */
+
+.add-bottom { margin-bottom:2rem !important; }
+.left { float:left; }
+.right { float:right; }
+.center { text-align:center; }
+
+
+/* Audio Player Styles
+================================================== */
+
+audio {
+margin:0 15px 0 14px;
+width:670px;
+}
+
+#mainwrap {}
+
+#audiowrap,
+#plwrap {
+margin:0 auto;
+width: 100%;
+}
+
+#tracks {
+position:relative;
+text-align:center;
+}
+
+#nowPlay {
+display:inline;
+}
+
+#npAction {
+padding:21px;
+position:absolute;
+}
+
+#npTitle {
+padding:21px;
+}
+
+#plList {
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+#plList li {
+cursor:pointer;
+display:block;
+margin:0;
+padding:21px 0;
+}
+
+#plList li:hover {
+background-color:rgba(0,0,0,.1);
+}
+
+.plItem {
+position:relative;
+}
+
+.plTitle {
+left:70px;
+overflow:hidden;
+position:absolute;
+right:65px;
+text-overflow:ellipsis;
+top:0;
+white-space:nowrap;
+}
+
+.plNum {
+padding-left:21px;
+width:35px;
+}
+
+.plLength {
+padding-left:21px;
+position:absolute;
+right:21px;
+top:0;
+}
+
+.plSel,
+.plSel:hover {
+background-color:rgba(0,0,0,.1);
+color:#fff;
+cursor:default !important;
+}
+
+a[id^="btn"] {
+border-radius:3px;
+color:#fff;
+cursor:pointer;
+display:inline-block;
+font-size:2rem;
+height:35px;
+line-height:.8;
+margin:0 20px 20px;
+padding:10px;
+text-decoration:none;
+transition:background .3s ease;
+width:35px;
+}
+
+a[id^="btn"]:last-child {
+margin-left:-4px;
+}
+
+a[id^="btn"]:hover,
+a[id^="btn"]:active {
+background-color:rgba(0,0,0,.1);
+color:#fff;
+}
+
+a[id^="btn"]::-moz-focus-inner {
+border:0;
+padding:0;
+}
+
+
+/* Plyr Overrides
+================================================== */
+
+.plyr--audio .plyr__controls {
+background-color:transparent;
+border:none;
+color:#fff;
+padding:20px 20px 20px 13px;
+width:100%;
+}
+
+.plyr--audio .plyr__controls button.tab-focus:focus,
+.plyr--audio .plyr__controls button:hover,
+.plyr__play-large {
+background:rgba(0,0,0,.1);
+}
+
+.plyr__progress--played, .plyr__volume--display {
+color:rgba(0,0,0,.1);
+}
+
+.plyr--audio .plyr__progress--buffer,
+.plyr--audio .plyr__volume--display {
+background:rgba(0,0,0,.1);
+}
+
+.plyr--audio .plyr__progress--buffer {
+color:rgba(0,0,0,.1);
+}
+
+
+/* Media Queries
+================================================== */
+
+@media only screen and (max-width:850px) {
+   /* #nowPlay { display:none; } */
+}
