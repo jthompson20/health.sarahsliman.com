@@ -60,7 +60,7 @@
         app.card.visible[data.key]  = card;
       }
 
-      console.log('>> app.card.update',data);
+      //console.log('>> app.card.update',data);
 
       // remove hidden class
       card.className  = card.className.replace(/\bhidden\b/g, "");
@@ -158,7 +158,7 @@
             response.json().then(function(json) {
               if (app.workout.pending){
 
-                console.log('>> app.workout.get cache',json);
+                //console.log('>> app.workout.get cache',json);
 
                 // clear current cards
                 app.card.clear();
@@ -182,7 +182,7 @@
           if (request.status === 200) {
             var response = JSON.parse(request.response);
 
-            console.log('>> app.workout.get http',response);
+            //console.log('>> app.workout.get http',response);
             
             app.workout.pending = false;
 
@@ -319,7 +319,7 @@
      .register('/service-worker.js')
      .then(function() { 
       alert('servis worker registered!');
-        console.log('Service Worker Registered'); 
+        //console.log('Service Worker Registered'); 
       });
   }
 
