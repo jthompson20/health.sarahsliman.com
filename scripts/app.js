@@ -309,6 +309,8 @@
       alert('servis worker registered!');
         console.log('Service Worker Registered'); 
       });
+  } else {
+    alert('this browser is not compatible with this website');
   }
 
 })();
