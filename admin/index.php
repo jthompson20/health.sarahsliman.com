@@ -69,11 +69,6 @@ $text   = file_get_contents($file);
     </div>
 </div>
 
-<div class="loader">
-    <svg viewBox="0 0 32 32" width="32" height="32">
-        <circle id="ud811Spinner" cx="16" cy="16" r="14" fill="none"></circle>
-    </svg>
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
