@@ -2,19 +2,6 @@
 (function() {
   'use strict';
 
-  var console   = {
-    log:  function(msg,data){
-
-      if ( ! data){
-        data  = {};
-      }
-
-      var node  = document.createElement('p');
-      node.innerHTML  = msg + data.toString();
-      document.body.appendChild(node);
-    }
-  };
-
   // init global app vars
   var app   = {
     loading: true,
@@ -90,27 +77,31 @@
 
 
       // see if this mp3 has already been cached, if so - don't show download button
-      caches.open("power-group-audio-v3.0").then(function(cache){
-        
-        // see if the requested audio file is already cached - if so, use it
-        return cache.match(data.mp3).then(function(response){
+      if ('caches' in window) {
+        caches.open("power-group-audio-v3.0").then(function(cache){
+          
+          // see if the requested audio file is already cached - if so, use it
+          return cache.match(data.mp3).then(function(response){
 
-          var image   = '';
+            var image   = '';
 
-          // see if this mp3 was already in cache
-          if (response){ 
-            // no download image
-            image   = '<img src="/images/check6.png" height="30"/>';
-          } else {
-            // download image
-            image   = '<img class="download" src="/images/dl-128.png" height="30"/>';
-          }
+            // see if this mp3 was already in cache
+            if (response){ 
+              // no download image
+              image   = '<img src="/images/check6.png" height="30"/>';
+            } else {
+              // download image
+              image   = '<img class="download" src="/images/dl-128.png" height="30"/>';
+            }
 
-          card.querySelector('.plLength').innerHTML   = image;
+            card.querySelector('.plLength').innerHTML   = image;
+
+          });
 
         });
-
-      });
+      } else {
+        card.querySelector('.plLength').innerHTML   = '';
+      }
 
 
 
@@ -245,30 +236,38 @@
     },
     downloading:  function(card,mp3){
 
-      caches.open("power-group-audio-v3.0").then(function(cache){
-        
-        // see if the requested audio file is already cached - if so, use it
-        return cache.match(mp3).then(function(response){
+      if ('caches' in window) {
 
-          var image   = '';
+        caches.open("power-group-audio-v3.0").then(function(cache){
+          
+          // see if the requested audio file is already cached - if so, use it
+          return cache.match(mp3).then(function(response){
 
-          // see if this mp3 was already in cache
-          if (response){ 
-            
-            // download complete image
-            image   = '<img src="/images/check6.png" height="30"/>';
-            card.querySelector('.plLength').innerHTML   = image;
-            return true;
+            var image   = '';
 
-          } else {
-            // download image
-            //image   = '<img class="download" src="/images/dl-128.png" height="30"/>';
-            return app.audio.downloading(card,mp3);
-          }
+            // see if this mp3 was already in cache
+            if (response){ 
+              
+              // download complete image
+              image   = '<img src="/images/check6.png" height="30"/>';
+              card.querySelector('.plLength').innerHTML   = image;
+              return true;
+
+            } else {
+              // download image
+              //image   = '<img class="download" src="/images/dl-128.png" height="30"/>';
+              return app.audio.downloading(card,mp3);
+            }
+
+          });
 
         });
 
-      });
+      } else {
+
+        alert('offline storage is not yet compatible with your device');
+
+      }
 
     }
 
@@ -322,8 +321,6 @@
       alert('servis worker registered!');
         console.log('Service Worker Registered'); 
       });
-  } else {
-    alert('this browser is not compatible with this website');
   }
 
 })();
