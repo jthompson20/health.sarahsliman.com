@@ -1,5 +1,19 @@
 <?php
-$file_contents  = file_get_contents('sarah.json');
+$url    = 'https://health.sarahsliman.com/admin/index.php';
+$file   = '/var/www/health.sarahsliman.com/admin/sarah.json';
+
+// check if form has been submitted
+if (isset($_POST['text'])) {
+    
+    // save the text contents
+    file_put_contents($file, $_POST['text']);
+
+    // redirect to form again
+    header(sprintf('Location: %s', $url));
+    printf('<a href="%s">Moved</a>.', htmlspecialchars($url));
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +36,12 @@ $file_contents  = file_get_contents('sarah.json');
 <div class="container">
     <div class="column add-bottom">
         <div id="mainwrap">
-            <?php echo $file_contents; ?>
+            <!-- HTML form -->
+            <form action="" method="post">
+                <textarea name="text"><?php echo htmlspecialchars($text) ?></textarea>
+                <input type="submit" />
+                <input type="reset" />
+            </form>
         </div>
     </div>
     <div class="column add-bottom center">
