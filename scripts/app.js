@@ -5,7 +5,7 @@
   var console   = {
     log:  function(msg,data){
       var node  = document.createElement('p');
-      node.innerHTML  = msg + str(data);
+      node.innerHTML  = msg + data.toString();
       document.body.appendChild(node);
     }
   };
