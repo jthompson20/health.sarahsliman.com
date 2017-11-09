@@ -6,12 +6,8 @@ $file   = '/var/www/health.sarahsliman.com/admin/sarah.json';
 if (isset($_POST['text'])) {
 
     // save the text contents
-    file_put_contents($file, $_POST['text']);
+    echo file_put_contents($file, $_POST['text']);
 
-    // redirect to form again
-    header(sprintf('Location: %s', $url));
-    printf('<a href="%s">Moved</a>.', htmlspecialchars($url));
-    exit();
 }
 
 $text   = file_get_contents($file);
@@ -45,7 +41,7 @@ $text   = file_get_contents($file);
                     <!-- Textarea -->
                     <div class="form-group">
                         <div class="col-xs-12">                     
-                            <textarea class="form-control" id="textarea" style="height:400px;" name="textarea"><?php echo htmlspecialchars($text); ?></textarea>
+                            <textarea class="form-control" id="textarea" style="height:400px;" name="text"><?php echo htmlspecialchars($text); ?></textarea>
                         </div>
                     </div>
 
