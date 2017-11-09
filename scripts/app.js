@@ -87,7 +87,7 @@
           // see if this mp3 was already in cache
           if (response){ 
             // no download image
-            image   = '<img src="/images/circle.svg" height="30"/>';
+            image   = '<img src="/images/check6.png" height="30"/>';
           } else {
             // download image
             image   = '<img class="download" src="/images/dl-128.png" height="30"/>';
@@ -114,16 +114,13 @@
           if (el.matches('IMG.download')){
 
             // we need to make a request for the mp3 (since our app automatically caches the request)
-            app.audio.download(data.mp3);
-
-            // update image used (to show as already downloaded)
-            card.querySelector('.plLength').innerHTML   = '<img src="/images/circle.svg" height="30"/>';
+            app.audio.download(card,data.mp3);
 
           } else {
 
             // play mp3
             app.audio.play(data.mp3);
-            
+
           }
         }
 
@@ -194,7 +191,7 @@
             }
 
             // save
-            //app.workout.save(response);
+            app.workout.save(response);
             
           }
         }
@@ -218,10 +215,48 @@
       app.audio.element.src         = mp3;
       app.audio.element.play();
     },
-    download:   function(mp3){
+    download:   function(card,mp3){
+
+      // load downloading icon
+      card.querySelector('.plLength').innerHTML  = '<img src="/images/downloading.gif" height="30"/>';
+
       // we just need to make a request for the mp3 - our app will auto cache it
       app.audio.element.src         = mp3;
+
+      // load resource
       app.audio.element.load(); // load so that the request for the audio will be made (and thus cached), but not played
+
+      // mark as downloading
+      app.audio.downloading(card,mp3);
+
+    },
+    downloading:  function(card,mp3){
+
+      caches.open("power-group-audio-v3.0").then(function(cache){
+        
+        // see if the requested audio file is already cached - if so, use it
+        return cache.match(mp3).then(function(response){
+
+          var image   = '';
+
+          // see if this mp3 was already in cache
+          if (response){ 
+            
+            // download complete image
+            image   = '<img src="/images/check6.png" height="30"/>';
+            card.querySelector('.plLength').innerHTML   = image;
+            return true;
+
+          } else {
+            // download image
+            //image   = '<img class="download" src="/images/dl-128.png" height="30"/>';
+            return app.audio.downloading(card,mp3);
+          }
+
+        });
+
+      });
+
     }
 
   };

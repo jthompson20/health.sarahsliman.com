@@ -11,7 +11,16 @@ var config 	= {
 		//'/scripts/app.js',
 		'/scripts/localforage-1.4.0.js',
 		//'/styles/style.css',
-	]
+    //'/images/downloading.gif',   // downloading gif
+    '/images/dl-128.png',        // download image
+	  '/images/refresh-128.png',   // refresh image
+    '/images/play.png',          // play button
+    // facebook logo
+    // my account logo 
+    // downloading gif
+    // download complete image
+    // service worker?
+  ]
 };
 
 
@@ -21,11 +30,6 @@ self.addEventListener('install', function(e) {
     caches.open(config.caches[0]).then(function(cache) {
       console.log('[ServiceWorker] Caching app shell');
       return cache.addAll(config.files);
-    })
-  );
-  e.waitUntil(
-    caches.open(config.caches[2]).then(function(cache) {
-      console.log('[ServiceWorker] Viewing what is in storage',cache);
     })
   );
 });
