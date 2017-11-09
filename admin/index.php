@@ -8,10 +8,6 @@ if (isset($_POST['text'])) {
     // save the text contents
     echo file_put_contents($file, $_POST['text']);
 
-    print "<pre>";
-    print_r($_POST);
-    exit;
-
 }
 
 $text   = file_get_contents($file);
