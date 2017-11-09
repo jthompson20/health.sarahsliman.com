@@ -5,7 +5,7 @@
   // init global app vars
   var app   = {
     loading: true,
-    api: "/sarah.json",
+    api: "/admin/sarah.json",
     spinner: document.querySelector('.loader'),
     cardTemplate: document.querySelector('.cardTemplate'),
     container: document.querySelector('#plList'),

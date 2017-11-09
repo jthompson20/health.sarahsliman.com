@@ -1,5 +1,5 @@
 var config 	= {
-	api: 		"/sarah.json",  // api url
+	api: 		"/admin/sarah.json",  // api url
 	caches: 	[
 		"power-group-v3.1", // app shell
 		"power-group-workouts-v3.1",   // app data
