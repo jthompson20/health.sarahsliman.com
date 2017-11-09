@@ -37,7 +37,42 @@ $text   = file_get_contents($file);
 
 <div class="container">
     <div class="column add-bottom">
-        <div id="mainwrap">
+        <div id="mainwrap" style="padding-top:30px;">
+
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <form class="form-horizontal" action="" method="post">
+                        <fieldset>
+
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                <div class="col-xs-12">                     
+                                    <textarea class="form-control" id="textarea" name="textarea">default text</textarea>
+                                </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="form-group">
+                                <div class="col-xs-12">                     
+                                    <input type="submit" />
+                                </div>
+                            </div>
+
+                            <!-- Reset -->
+                            <div class="form-group">
+                                <div class="col-xs-12">                     
+                                    <input type="reset" />
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+
+                </div>
+            </div>
+
             <!-- HTML form -->
             <form action="" method="post">
                 <textarea name="text"><?php echo htmlspecialchars($text) ?></textarea>
