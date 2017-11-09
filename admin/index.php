@@ -8,6 +8,10 @@ if (isset($_POST['text'])) {
     // save the text contents
     echo file_put_contents($file, $_POST['text']);
 
+    print "<pre>";
+    print_r($_POST);
+    exit;
+
 }
 
 $text   = file_get_contents($file);
@@ -35,7 +39,7 @@ $text   = file_get_contents($file);
     <div class="column add-bottom">
         <div id="mainwrap" style="padding-top:30px;">
 
-            <form class="form-horizontal" action="" method="post">
+            <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <fieldset>
 
                     <!-- Textarea -->
