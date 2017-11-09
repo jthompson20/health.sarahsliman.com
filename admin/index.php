@@ -1,5 +1,5 @@
 <?php
-$file_contents  = 'my file contents';
+$file_contents  = json_encode(file_get_contents('sarah.json'),JSON_PRETTY_PAINT);
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,13 +17,11 @@ $file_contents  = 'my file contents';
 
 <header class="header">
     <h1 class="header__title">Power Group</h1>
-    <button id="butFacebook" class="headerButton" aria-label="Facebook"></button>
-    <button id="butHome" class="headerButton" aria-label="Home"></button>
 </header>
 
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="column add-bottom">
+        <div id="mainwrap">
             <?php echo $file_contents; ?>
         </div>
     </div>
