@@ -286,6 +286,7 @@
     play:   function(mp3){
       // if the audio element has a hidden class, remove it
       app.audio.element.className   = app.audio.element.className.replace(/\binvisible\b/g, "");
+      app.audio.element.className   = app.audio.element.className.replace(/\bhidden\b/g, "");
       app.audio.element.src         = mp3;
       app.audio.element.play();
     },
