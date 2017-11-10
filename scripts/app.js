@@ -30,12 +30,19 @@
   /* Custom Functions */
   app.dates   = {
     now:    function(){
-      return Date.now();
+      var date  = new Date();
+      return date.getMilliseconds();
     },
     month:  function(){
       var date  = new Date();
       var months  = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       return months[date.getMonth()];
+    },
+    format:   {
+      month:  function(i){
+        var months  = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        return months[i];
+      }
     }
   };
 
@@ -78,7 +85,7 @@
         app.card.visible[data.key]  = card;
       }
 
-      console.log('>> app.card.update',data);
+      //console.log('>> app.card.update',data);
 
       // remove hidden class
       card.className  = card.className.replace(/\bhidden\b/g, "");
@@ -178,7 +185,7 @@
             response.json().then(function(json) {
               if (app.workout.pending){
 
-                console.log('>> app.workout.get cache',json);
+                //console.log('>> app.workout.get cache',json);
 
                 // clear current cards
                 app.card.clear();
@@ -202,7 +209,7 @@
           if (request.status === 200) {
             var response = JSON.parse(request.response);
 
-            console.log('>> app.workout.get http',response);
+            //console.log('>> app.workout.get http',response);
             
             app.workout.pending = false;
 
@@ -241,7 +248,7 @@
             response.json().then(function(json) {
               if (app.message.pending){
 
-                console.log('>> app.message.get cache',json);
+                //console.log('>> app.message.get cache',json);
 
                 app.messagebox.update(json);
 
@@ -259,7 +266,7 @@
           if (request.status === 200) {
             var response = JSON.parse(request.response);
 
-            console.log('>> app.message.get http',response);
+            //console.log('>> app.message.get http',response);
             
             app.message.pending = false;
 
@@ -285,13 +292,14 @@
 
   app.messagebox   = {
     update:   function(message){
-      console.log('>> app.messagebox.update',message);
+      //console.log('>> app.messagebox.update',message);
 
-      // create new date
-      var newdate   = Date(message.updated);
+      // create new date based on timestamp
+      var newdate   = new Date();
+      newdate.setMilliseconds(message.updated);
 
       app.msgTemplate.querySelector('.message').innerHTML = message.message;
-      app.lastUpdated.querySelector('.time').innerHTML = newdate;
+      app.lastUpdated.querySelector('.time').innerHTML = newdate.toDateString() + " " + newdate.toLocaleTimeString(); //app.dates.format.month(newdate.getMonth()) + " " + newdate.getDate() + ", " + newdate.getFullYear() + " " + newdate.getHours() + ":" + newdate.getMinutes() + ":" + newdate.getSeconds();
     }
   };
 
@@ -425,7 +433,7 @@
     navigator.serviceWorker
      .register('/service-worker.js')
      .then(function() { 
-        console.log('Service Worker Registered'); 
+        //console.log('Service Worker Registered'); 
       });
   }
 

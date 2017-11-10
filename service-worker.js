@@ -24,17 +24,17 @@ var config 	= {
 
 
 self.addEventListener('install', function(e) {
-  console.log('[ServiceWorker] Install');
+  //console.log('[ServiceWorker] Install');
   e.waitUntil(
     caches.open(config.caches[0]).then(function(cache) {
-      console.log('[ServiceWorker] Caching app shell');
+      //console.log('[ServiceWorker] Caching app shell');
       return cache.addAll(config.files);
     })
   );
 });
 
 self.addEventListener('activate', function(e) {
-  console.log('[ServiceWorker] Activate');
+  //console.log('[ServiceWorker] Activate');
   e.waitUntil(
     caches.keys().then(function(keyList) {
       return Promise.all(keyList.map(function(key) {
@@ -48,7 +48,7 @@ self.addEventListener('activate', function(e) {
       	}
 
         if (old) {
-          console.log('[ServiceWorker] Removing old cache', key);
+          //console.log('[ServiceWorker] Removing old cache', key);
           return caches.delete(key);
         }
 
@@ -65,7 +65,7 @@ self.addEventListener('fetch', function(e) {
         .then(function(response) {
           return caches.open(config.caches[1]).then(function(cache) {
             cache.put(e.request.url, response.clone());
-            console.log('[ServiceWorker] Fetched & Cached', e.request.url);
+            //console.log('[ServiceWorker] Fetched & Cached', e.request.url);
             return response;
           });
         })
@@ -83,7 +83,7 @@ self.addEventListener('fetch', function(e) {
         // see if the requested audio file is already cached - if so, use it
         return cache.match(e.request.url).then(function(response){
 
-          console.log('[Service Worker] Fetching audio from cache ..');
+          //console.log('[Service Worker] Fetching audio from cache ..');
 
           // if cache is found, return it - else, fetch the audio
           return response || fetch(e.request.url).then(function(response){
@@ -92,7 +92,7 @@ self.addEventListener('fetch', function(e) {
 
             // add to cache here
             cache.put(e.request.url, response.clone());
-            console.log('[Service Worker] Unable to fetch from cache, instead we fetched from network then cached ..');
+            //console.log('[Service Worker] Unable to fetch from cache, instead we fetched from network then cached ..');
             return response;
 
           });
@@ -107,7 +107,7 @@ self.addEventListener('fetch', function(e) {
   } else {
     e.respondWith(
       caches.match(e.request).then(function(response) {
-        console.log('[ServiceWorker] Fetch Only', e.request.url);
+        //console.log('[ServiceWorker] Fetch Only', e.request.url);
         return response || fetch(e.request);
       })
     );
