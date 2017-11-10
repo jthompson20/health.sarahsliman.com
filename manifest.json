@@ -31,6 +31,11 @@
       	"src": "images/muscle-192.png",
       	"type": "image/png",
       	"sizes": "192x192"
+    },
+    {
+        "src": "images/muscle-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
     }
   ],
   "background_color": 	"#999999",
