@@ -379,7 +379,7 @@
 
   /* Event listener for FB */
   document.getElementById('butFacebook').addEventListener('click', function() {
-    alert('this is where you will be redirected to Sarahs FB page');
+    window.open('https://www.facebook.com/groups/1442018715889142/');
   });
 
   document.addEventListener('DOMContentLoaded', function() {
