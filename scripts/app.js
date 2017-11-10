@@ -44,6 +44,15 @@
       app.card.visible  = {};
     },
 
+    loading:  function(){
+      app.spinner.removeAttribute('hidden');
+      app.container.setAttribute('hidden',true);
+    },
+    unloading:  function(){
+      app.spinner.setAttribute('hidden', true);
+      app.container.removeAttribute('hidden');
+    },
+
     // update the card
     update:   function(data){
 
@@ -151,6 +160,8 @@
     // cache then network
     get: function(){
 
+      app.card.loading();
+
       // only if supported
       if ('caches' in window) {
         caches.match(app.api).then(function(response) {
@@ -196,6 +207,7 @@
 
             // save
             app.workout.save(response);
+            app.card.unloading();
             
           }
         }
@@ -278,10 +290,11 @@
     app.workout.get();
   });
 
-  /* Event listener for Account button */
+  /* Event listener for Account button 
   document.getElementById('butHome').addEventListener('click', function() {
     alert('this is where you will view your account information');
   });
+  */
 
   /* Event listener for FB */
   document.getElementById('butFacebook').addEventListener('click', function() {
