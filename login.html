@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/images/muscle-32.png">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Sarah Sliman's Power Group">
+    <meta name="theme-color" content="#999999">
+	<title>Power Group | Login</title>
+	<link rel="manifest" href="/manifest.json">
+    <!-- Insert link to stylesheet here -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link rel='stylesheet' href='/styles/style.css'/>
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDB2ge6P56SeA4epHvs9cnVTN-nSu9kiF0",
+        authDomain: "sarahs-power-group.firebaseapp.com",
+        databaseURL: "https://sarahs-power-group.firebaseio.com",
+        projectId: "sarahs-power-group",
+        storageBucket: "",
+        messagingSenderId: "1073212284655"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.4.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.4.1/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        callbacks: {
+          signInSuccess: function(currentUser, credential, redirectUrl) {
+            // Do something.
+            // Return type determines whether we continue the redirect automatically
+            // or whether we leave that to developer to handle.
+            return true;
+          },
+          uiShown: function() {
+            // The widget is rendered.
+            // Hide the loader.
+            //document.getElementById('loader').style.display = 'none';
+          }
+        },
+        credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM,
+
+        // Query parameter name for mode.
+        queryParameterForWidgetMode: 'mode',
+        // Query parameter name for sign in success url.
+        queryParameterForSignInSuccessUrl: 'success',
+
+        signInFlow: 'popup',
+        signInSuccessUrl: 'index.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+          //firebase.auth.GithubAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          //firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        //tosUrl: ''
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+</head>
+<body>
+
+<header class="header">
+    <h1 class="header__title">Power Group</h1>
+</header>
+
+<div class="container">
+    <div class="column add-bottom">
+        <div id="mainwrap">
+
+        	<div id="firebaseui-auth-container"></div>
+
+            <div class="center column">
+                <hr />
+            </div>
+
+        </div>
+    </div>
+    <div class="column add-bottom center">
+        <p>&copy; Sarah Sliman</p>
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+</body>
+</html>

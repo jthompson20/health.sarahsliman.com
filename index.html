@@ -14,6 +14,89 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	<link rel='stylesheet' href='/styles/style.css'/>
 
+    <!-- Firebase Login -->
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDB2ge6P56SeA4epHvs9cnVTN-nSu9kiF0",
+        authDomain: "sarahs-power-group.firebaseapp.com",
+        databaseURL: "https://sarahs-power-group.firebaseio.com",
+        projectId: "sarahs-power-group",
+        storageBucket: "",
+        messagingSenderId: "1073212284655"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+
+            console.log('>> user',user);
+
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var phoneNumber = user.phoneNumber;
+            var providerData = user.providerData;
+
+            // make request to see if they are an active user
+            var request = new XMLHttpRequest();
+              request.onreadystatechange = function() {
+                if (request.readyState === XMLHttpRequest.DONE) {
+                  if (request.status === 200) {
+                    var response = JSON.parse(request.response);
+                    var auth    = false;
+                    for (var i = 0; i < response.length; i++){
+                      if (email == response[i].email){
+                        auth    = true;
+                        break;
+                      }
+                    }
+                    //determine if allowed access or not
+                    if ( ! auth){
+                        window.location     = '/offer.html';
+                    }
+                  }
+                }
+              };
+              request.open('GET', '/admin/auth.json');
+              request.send();
+
+            /*
+            user.getIdToken().then(function(accessToken) {
+              document.getElementById('sign-in-status').textContent = 'Signed in';
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                email: email,
+                emailVerified: emailVerified,
+                phoneNumber: phoneNumber,
+                photoURL: photoURL,
+                uid: uid,
+                accessToken: accessToken,
+                providerData: providerData
+              }, null, '  ');
+            });
+            */
+          } else {
+            // User is signed out.
+            window.location     = '/login.html';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    </script>
+
 </head>
 <body>
 
