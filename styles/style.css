@@ -17,7 +17,7 @@ audio {
   width: 100%;
   height: 56px;
   color: #FFF;
-  background: #2F3C5B; /*#0665a2;*/
+  background: #242331; /*#0665a2;*/
   position: fixed;
   font-size: 20px;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12), 0 4px 2px -2px rgba(0, 0, 0, 0.2);
@@ -113,7 +113,7 @@ audio {
 html,body {
 -webkit-font-smoothing:antialiased;
 -webkit-text-size-adjust:100%;
-background-color:#486884;/*#0665a2;*/
+background-color:#AAAAAA;/*#0665a2;*/
 color:#fff;
 font-size:105%;
 font-family:"Oxygen", HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
