@@ -12,6 +12,7 @@
     spinner: document.querySelector('.loader'),
     cardTemplate: document.querySelector('.cardTemplate'),
     msgTemplate: document.querySelector('.messagebox'),
+    lastUpdated: document.querySelector('.lastupdated'),
     container: document.querySelector('#plList'),
     data: [{
       title:  "Welcome Message",
@@ -28,6 +29,9 @@
 
   /* Custom Functions */
   app.dates   = {
+    now:    function(){
+      return Date.now();
+    },
     month:  function(){
       var date  = new Date();
       var months  = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -259,6 +263,8 @@
             
             app.message.pending = false;
 
+            response.updated  = app.dates.now();
+
             app.messagebox.update(response);
 
             // save
@@ -271,13 +277,21 @@
       request.send();
     },
     save:   function(message){
+      // add date
+      message.updated   = app.dates.now();
       window.localforage.setItem('message',message);
     }
   };
 
   app.messagebox   = {
     update:   function(message){
+      console.log('>> app.messagebox.update',message);
+
+      // create new date
+      var newdate   = Date(message.updated);
+
       app.msgTemplate.querySelector('.message').innerHTML = message.message;
+      app.lastUpdated.querySelector('.time').innerHTML = newdate;
     }
   };
 
@@ -385,9 +399,11 @@
 
     window.localforage.getItem('message', function(err, message) {
 
-
       if ( ! message) {
         
+        // set initial updated date
+        app.msg.updated   = app.dates.now();
+
         // show initial message
         app.messagebox.update(app.msg);
 

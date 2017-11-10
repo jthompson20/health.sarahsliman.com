@@ -5,6 +5,10 @@ audio {
   	width:  100% !important;
 }
 
+.lastupdated {
+  color:#000000 !important;
+}
+
 .refresh {
 	cursor: pointer;
 }
