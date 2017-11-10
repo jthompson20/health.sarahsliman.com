@@ -3,7 +3,7 @@ var config 	= {
 	caches: 	[
 		"power-group-v3.1", // app shell
 		"power-group-workouts-v3.1",   // app data
-    "power-group-audio-v3.0"  // audio data
+    "power-group-audio-v3.0",  // audio data
 	],
 	files: 		[
 		'/',
@@ -11,14 +11,13 @@ var config 	= {
 		//'/scripts/app.js',
 		'/scripts/localforage-1.4.0.js',
 		//'/styles/style.css',
-    //'/images/downloading.gif',   // downloading gif
     '/images/dl-128.png',        // download image
 	  '/images/refresh-128.png',   // refresh image
     '/images/play.png',          // play button
-    // facebook logo
+    '/images/fb-128.png',   // facebook logo
     // my account logo 
-    // downloading gif
-    // download complete image
+    '/images/downloading.gif',  // downloading gif
+    '/images/check6.png',  // download complete image
     // service worker?
   ]
 };

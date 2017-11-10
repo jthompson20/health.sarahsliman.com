@@ -5,14 +5,19 @@
   // init global app vars
   var app   = {
     loading: true,
-    api: "/admin/sarah.json",
+    api: {
+      workouts: "/admin/sarah.json",
+      message:  "/admin/msg.json"
+    },
     spinner: document.querySelector('.loader'),
     cardTemplate: document.querySelector('.cardTemplate'),
+    msgTemplate: document.querySelector('.messagebox'),
     container: document.querySelector('#plList'),
     data: [{
       title:  "Welcome Message",
       mp3:  "/audio/sarah.mp3"
     }],
+    msg:  {"message": "Welcome to my Power Group!"}
   };
 
   app.random  = function(len=10,chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'){
@@ -164,7 +169,7 @@
 
       // only if supported
       if ('caches' in window) {
-        caches.match(app.api).then(function(response) {
+        caches.match(app.api.workouts).then(function(response) {
           if (response) {
             response.json().then(function(json) {
               if (app.workout.pending){
@@ -212,7 +217,7 @@
           }
         }
       };
-      request.open('GET', app.api);
+      request.open('GET', app.api.workouts);
       request.send();
     },
 
@@ -220,14 +225,67 @@
       window.localforage.setItem('workouts',workout);
     }
     
-  }
+  };
 
+  app.message   = {
+    pending:  null,
+    get:    function(){
+      // only if supported
+      if ('caches' in window) {
+        caches.match(app.api.message).then(function(response) {
+          if (response) {
+            response.json().then(function(json) {
+              if (app.message.pending){
+
+                console.log('>> app.message.get cache',json);
+
+                app.messagebox.update(json);
+
+              }
+            });
+          }
+        });
+      }
+
+      // Make the XHR to get the data, then update the card
+      app.message.pending = true;
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState === XMLHttpRequest.DONE) {
+          if (request.status === 200) {
+            var response = JSON.parse(request.response);
+
+            console.log('>> app.message.get http',response);
+            
+            app.message.pending = false;
+
+            app.messagebox.update(response);
+
+            // save
+            app.message.save(response);
+            
+          }
+        }
+      };
+      request.open('GET', app.api.message);
+      request.send();
+    },
+    save:   function(message){
+      window.localforage.setItem('message',message);
+    }
+  };
+
+  app.messagebox   = {
+    update:   function(message){
+      app.msgTemplate.querySelector('.message').innerHTML = message.message;
+    }
+  };
 
   app.audio   = {
     element:  document.getElementById('audio-player'),
     play:   function(mp3){
       // if the audio element has a hidden class, remove it
-      app.audio.element.className   = app.audio.element.className.replace(/\bhidden\b/g, "");
+      app.audio.element.className   = app.audio.element.className.replace(/\binvisible\b/g, "");
       app.audio.element.src         = mp3;
       app.audio.element.play();
     },
@@ -288,6 +346,7 @@
   /* Event listener for refresh button */
   document.getElementById('refresh').addEventListener('click', function() {
     app.workout.get();
+    app.message.get();
   });
 
   /* Event listener for Account button 
@@ -320,6 +379,24 @@
 
       // fetch workouts (cache, then network)
       app.workout.get();
+
+    });
+
+    window.localforage.getItem('message', function(err, message) {
+
+
+      if ( ! message) {
+        
+        // show initial message
+        app.messagebox.update(app.msg);
+
+        // save initial data
+        app.message.save(app.msg);
+
+      }
+
+      // fetch message (cache, then network)
+      app.message.get();
 
     });
 

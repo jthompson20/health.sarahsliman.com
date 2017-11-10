@@ -21,14 +21,19 @@
 <div class="container">
     <div class="column add-bottom">
         <div id="mainwrap">
-            <div id="nowPlay">
-                <span class="left" id="npAction"></span>
-                <span class="right" id="npTitle"></span>
+
+            <div class="messagebox">
+                <p class="message"></p>
             </div>
+
+            <div class="center column add-bottom">
+                <hr />
+            </div>
+
             <div id="audiowrap">
                 
                 <div id="audio0">
-                    <audio id="audio-player" class="hidden" controls="controls">Your browser does not support HTML5 Audio!</audio>
+                    <audio id="audio-player" class="invisible" controls="controls">Your browser does not support HTML5 Audio!</audio>
                 </div>
 
                 <!--
@@ -41,7 +46,7 @@
             </div>
             <div id="plwrap">
                 <ul id="plList">
-                    <li class="cardTemplate hidden" data-mp3="/audio/eew.mp3">
+                    <li class="cardTemplate hidden">
                         <div class="plItem">
                             <div class="plNum">
                                 <img src="/images/play.png" height="30"/>
