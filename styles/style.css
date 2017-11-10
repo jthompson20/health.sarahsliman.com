@@ -11,8 +11,16 @@ audio {
 
 .refresh {
 	cursor: pointer;
+  margin-top:-7px;
 }
-
+.facebook {
+  margin-top:-3px;
+  padding-left:5px;
+  padding-right:11px;
+}
+.myaccount {
+  margin-top:-3px;
+}
 .hidden {
 	display:none !important;
 }

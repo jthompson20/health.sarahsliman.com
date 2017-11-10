@@ -372,11 +372,10 @@
     app.message.get();
   });
 
-  /* Event listener for Account button 
+  /* Event listener for Account button */
   document.getElementById('butHome').addEventListener('click', function() {
     alert('this is where you will view your account information');
   });
-  */
 
   /* Event listener for FB */
   document.getElementById('butFacebook').addEventListener('click', function() {
