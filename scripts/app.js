@@ -317,13 +317,20 @@
       // load downloading icon
       card.querySelector('.plLength').innerHTML  = '<img src="/images/downloading.gif" height="30"/>';
 
+      /*
       // we just need to make a request for the mp3 - our app will auto cache it
       app.audio.element.src         = mp3;
 
       // load resource
       app.audio.element.load(); // load so that the request for the audio will be made (and thus cached), but not played
+      */
 
-      // mark as downloading
+      // Make the XHR to request the mp3 - our service worker will take care of the rest
+      var request = new XMLHttpRequest();
+      request.open('GET', mp3);
+      request.send();
+
+      // mark as downloading - once in cache, success logo will appear
       app.audio.downloading(card,mp3);
 
     },
