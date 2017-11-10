@@ -16,7 +16,7 @@
     container: document.querySelector('#plList'),
     data: [{
       title:  "Welcome Message",
-      mp3:  "/audio/sarah.mp3"
+      mp3:  "https://s3.amazonaws.com/power-group/sarah.mp3"
     }],
     msg:  {"message": "Welcome to my Power Group!"}
   };
