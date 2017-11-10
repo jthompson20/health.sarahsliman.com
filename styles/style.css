@@ -68,9 +68,9 @@ audio {
   .header #butAdd {
     background: url(/images/ic_add_white_24px.svg) center center no-repeat; }
    /*.header #butHome {
-    background: url(/images/gear.png) center center no-repeat; }*/
+    background: url(/images/gear.png) center center no-repeat; }
   .header #butFacebook {
-    background: url(/images/fbicon.png) center center no-repeat; }
+    background: url(/images/fbicon.png) center center no-repeat; }*/
 
 .header__title {
   font-weight: 500;
