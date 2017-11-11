@@ -373,6 +373,10 @@
 
   };
 
+  app.fbase   = {
+    user:   {}
+  };
+
   /* Event listener for refresh button */
   document.getElementById('refresh').addEventListener('click', function() {
     app.workout.get();
@@ -391,45 +395,87 @@
 
   document.addEventListener('DOMContentLoaded', function() {
 
-    window.localforage.getItem('workouts', function(err, workouts) {
+    // authenticate user
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user){
+        app.fbase.user  = user;
 
-      if ( ! workouts) {
-        
-        // load initial data
-        for (var i = 0; i < app.data.length; i++){
-          app.data[i].key   = i;
-          app.card.update(app.data[i]);
-        }
-        
-        // save initial data
-        app.workout.save(app.data);
+        // make request to see if they are an active user
+        var request = new XMLHttpRequest();
+          request.onreadystatechange = function() {
+            if (request.readyState === XMLHttpRequest.DONE) {
+              if (request.status === 200) {
+                var response = JSON.parse(request.response);
+                var auth    = false;
+                for (var i = 0; i < response.length; i++){
+                  if (email == response[i].email){
+                    auth    = true;
+                    break;
+                  }
+                }
+                //determine if allowed access or not
+                if ( ! auth){
+                    window.location     = '/offer.html';
+                } else {
 
+                  window.localforage.getItem('workouts', function(err, workouts) {
+
+                    if ( ! workouts) {
+                      
+                      // load initial data
+                      for (var i = 0; i < app.data.length; i++){
+                        app.data[i].key   = i;
+                        app.card.update(app.data[i]);
+                      }
+                      
+                      // save initial data
+                      app.workout.save(app.data);
+
+                    }
+
+                    // fetch workouts (cache, then network)
+                    app.workout.get();
+
+                  });
+
+                  window.localforage.getItem('message', function(err, message) {
+
+                    if ( ! message) {
+                      
+                      // set initial updated date
+                      app.msg.updated   = app.dates.now();
+
+                      // show initial message
+                      app.messagebox.update(app.msg);
+
+                      // save initial data
+                      app.message.save(app.msg);
+
+                    }
+
+                    // fetch message (cache, then network)
+                    app.message.get();
+
+                  });
+
+                }
+              }
+            }
+          };
+          request.open('GET', '/admin/auth.json');
+          request.send();
+
+
+      } else {
+        // user is logged out
+        window.location   = '/login.html';
       }
-
-      // fetch workouts (cache, then network)
-      app.workout.get();
-
+    }, function(error) {
+      console.log(error);
     });
 
-    window.localforage.getItem('message', function(err, message) {
 
-      if ( ! message) {
-        
-        // set initial updated date
-        app.msg.updated   = app.dates.now();
 
-        // show initial message
-        app.messagebox.update(app.msg);
-
-        // save initial data
-        app.message.save(app.msg);
-
-      }
-
-      // fetch message (cache, then network)
-      app.message.get();
-
-    });
 
   });
 
