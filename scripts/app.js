@@ -418,6 +418,8 @@
                     window.location     = '/offer.html';
                 } else {
 
+                  // update my account information
+
                   window.localforage.getItem('workouts', function(err, workouts) {
 
                     if ( ! workouts) {
