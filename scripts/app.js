@@ -13,6 +13,7 @@
     cardTemplate: document.querySelector('.cardTemplate'),
     msgTemplate: document.querySelector('.messagebox'),
     lastUpdated: document.querySelector('.lastupdated'),
+    addDialog: document.querySelector('.dialog-container'),
     container: document.querySelector('#plList'),
     data: [{
       title:  "Welcome Message",
@@ -377,6 +378,19 @@
     user:   {}
   };
 
+  app.dialog  = {
+    visible:  false,
+    toggle:   function(){
+      if ( ! app.dialog.visible) {
+        app.dialog.visible  = true;
+        app.addDialog.className += " dialog-container--visible";
+      } else {
+        app.dialog.visible  = false;
+        app.addDialog.classList.remove('dialog-container--visible');
+      }
+    }
+  };
+
   /* Event listener for refresh button */
   document.getElementById('refresh').addEventListener('click', function() {
     app.workout.get();
@@ -385,12 +399,24 @@
 
   /* Event listener for Account button */
   document.getElementById('butHome').addEventListener('click', function() {
-    alert('this is where you will view your account information');
+    //alert('this is where you will view your account information');
+    app.dialog.toggle();
   });
 
   /* Event listener for FB */
   document.getElementById('butFacebook').addEventListener('click', function() {
     window.open('https://www.facebook.com/groups/1442018715889142/');
+  });
+
+  /* Event listener for close dialog button */
+  document.getElementById('butDialogSave').addEventListener('click', function() {
+    
+    app.dialog.toggle();
+  });
+
+  /* Event listener for save dialog button */
+  document.getElementById('butDialogCancel').addEventListener('click', function() {
+    app.dialog.toggle();
   });
 
   document.addEventListener('DOMContentLoaded', function() {

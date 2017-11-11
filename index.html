@@ -37,7 +37,6 @@
     <img id="refresh" aria-label="Refresh" class="refresh" src="/images/refresh-128.png" height="40" />
     <img id="butFacebook" aria-label="Facebook" class="facebook" src="/images/fb-128.png" height="30" />
     <img id="butHome" aria-label="My Account" class="myaccount" src="/images/myaccount.png" height="30" />
-    
 </header>
 
 <div class="container">
@@ -73,7 +72,7 @@
                             <div class="plNum">
                                 <img src="/images/play.png" height="30"/>
                             </div>
-                            <div class="plTitle">Welcome Message</div>
+                            <div class="plTitle"></div>
                             <div class="plLength">
                                 
                             </div>
@@ -98,10 +97,25 @@
 </div>
 
 <div class="loader">
+    <!--
     <svg viewBox="0 0 32 32" width="32" height="32">
         <circle id="ud811Spinner" cx="16" cy="16" r="14" fill="none"></circle>
     </svg>
+    -->
 </div>
+
+  <div class="dialog-container">
+    <div class="dialog">
+      <div class="dialog-title"></div>
+      <div class="dialog-body">
+        <p>my dialog</p>
+      </div>
+      <div class="dialog-buttons">
+        <button id="butDialogSave" class="button">Save</button>
+        <button id="butDialogCancel" class="button">Cancel</button>
+      </div>
+    </div>
+  </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
