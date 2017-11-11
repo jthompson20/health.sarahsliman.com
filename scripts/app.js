@@ -408,7 +408,7 @@
                 var response = JSON.parse(request.response);
                 var auth    = false;
                 for (var i = 0; i < response.length; i++){
-                  if (email == response[i].email){
+                  if (app.fbase.user.email == response[i].email){
                     auth    = true;
                     break;
                   }
