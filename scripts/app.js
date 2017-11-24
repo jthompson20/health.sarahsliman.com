@@ -19,7 +19,7 @@
       title:  "Welcome Message",
       mp3:  "https://s3.amazonaws.com/power-group/sarah.mp3"
     }],
-    msg:  {"message": "Welcome to my Power Group!"}
+    msg:  {"message": "Welcome to my Power Group!"},
   };
 
   app.random  = function(len=10,chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'){
@@ -378,6 +378,9 @@
     user:   {}
   };
 
+  app.stripe  = {};
+  app.user    = {};
+
   app.dialog  = {
     visible:  false,
     toggle:   function(){
@@ -432,67 +435,62 @@
             if (request.readyState === XMLHttpRequest.DONE) {
               if (request.status === 200) {
                 var response = JSON.parse(request.response);
-                var auth    = false;
-                for (var i = 0; i < response.length; i++){
-                  if (app.fbase.user.email == response[i].email){
-                    auth    = true;
-                    break;
+                
+                // set user global vars
+                app.user      = response;
+
+                window.localforage.getItem('workouts', function(err, workouts) {
+
+                  if ( ! workouts) {
+                    
+                    // load initial data
+                    for (var i = 0; i < app.data.length; i++){
+                      app.data[i].key   = i;
+                      app.card.update(app.data[i]);
+                    }
+                    
+                    // save initial data
+                    app.workout.save(app.data);
+
                   }
-                }
-                //determine if allowed access or not
-                if ( ! auth){
-                    window.location     = '/offer.html';
-                } else {
 
-                  // update my account information
+                  // fetch workouts (cache, then network)
+                  app.workout.get();
 
-                  window.localforage.getItem('workouts', function(err, workouts) {
+                });
 
-                    if ( ! workouts) {
-                      
-                      // load initial data
-                      for (var i = 0; i < app.data.length; i++){
-                        app.data[i].key   = i;
-                        app.card.update(app.data[i]);
-                      }
-                      
-                      // save initial data
-                      app.workout.save(app.data);
+                window.localforage.getItem('message', function(err, message) {
 
-                    }
+                  if ( ! message) {
+                    
+                    // set initial updated date
+                    app.msg.updated   = app.dates.now();
 
-                    // fetch workouts (cache, then network)
-                    app.workout.get();
+                    // show initial message
+                    app.messagebox.update(app.msg);
 
-                  });
+                    // save initial data
+                    app.message.save(app.msg);
 
-                  window.localforage.getItem('message', function(err, message) {
+                  }
 
-                    if ( ! message) {
-                      
-                      // set initial updated date
-                      app.msg.updated   = app.dates.now();
+                  // fetch message (cache, then network)
+                  app.message.get();
 
-                      // show initial message
-                      app.messagebox.update(app.msg);
+                });
 
-                      // save initial data
-                      app.message.save(app.msg);
+              } else {
 
-                    }
-
-                    // fetch message (cache, then network)
-                    app.message.get();
-
-                  });
-
-                }
+                // user is not active - send to billing
+                //alert('not active');
+                window.location   = '/offer.html';
               }
+
             }
           };
-          request.open('GET', '/admin/auth.json');
-          request.send();
 
+          request.open('GET', 'http://45.55.225.28:3005/user/active/' + app.fbase.user.email);
+          request.send();
 
       } else {
         // user is logged out
