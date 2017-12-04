@@ -483,7 +483,7 @@
 
                 // user is not active - send to billing
                 //alert('not active');
-                window.location   = '/offer.html';
+                window.location   = '/index.html';
               }
 
             }
